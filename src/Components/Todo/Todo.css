@@ -1,3 +1,7 @@
 .todo {
-    padding: 4rem !important;
+    position: absolute;
+}
+
+.todo-col-button {
+    align-content: center;
 }

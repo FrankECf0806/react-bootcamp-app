@@ -10,7 +10,7 @@ export default function Main() {
         'Pick up Joe',
         'Go to the supermarket'
     ])
-    const [item, setItem] = useState()
+    const [item, setItem] = useState('')
 
     function handleOnChangeTextField({ target }){
         const { value } = target
@@ -18,8 +18,30 @@ export default function Main() {
     }
 
 	function handleOnClickButton(){
-		setItems([ ...items, item])
+        if(item.trim() === '') return
+		setItems([ ...items, item])        
+        setItem('')
 	}
+
+    function deleteChildItem(index){
+        setItems(items.filter((item, i)=> i !== index))
+    }
+
+    function deleteAllItems(){
+        setItems([])
+    }
+
+    function renderDeleteAllButton(){
+
+        if(items.length <= 1) return
+        return (
+            <Button 
+                variant="outline-danger"
+                onClick={ deleteAllItems }>
+                    Delete All Items
+            </Button>
+        )
+    }
 
     return (
         <div className='main'>
@@ -41,7 +63,8 @@ export default function Main() {
                             <TextField
                                 fullWidth
                                 label="Add your items"
-                                id="fullWidth" 
+                                id="fullWidth"
+                                value={ item}
                                 onChange={ handleOnChangeTextField }/>
                         </Box>
                     </Col>
@@ -54,18 +77,24 @@ export default function Main() {
                         </Button>
                     </Col>
                 </Row>
-                {/* TODO list */}
-                <Row className='main-todo-list'>
+            </Container>
+            {/* TODO list */}
+            <Container className='main-todo-container'>
+                <Row className='main-todo-row'>
                     <Col>
-						{
-							items.map((item, index) => {
-								return (
-									<Todo key={ index } item={ item }/>
-								)
-							})
-						}
+                        { renderDeleteAllButton() }
                     </Col>
                 </Row>
+                {
+                    items.map((item, index) => {
+                        return (
+                            <Todo
+                                key={ index }
+                                item={ item }
+                                onClickChildButton={()=> deleteChildItem(index) } />
+                        )
+                    })
+                }
             </Container>
         </div>
     )

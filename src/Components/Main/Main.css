@@ -7,6 +7,11 @@
     align-content: center;
 }
 
-.main-todo-list {
-    margin: 2rem !important;
+.main-todo-row {
+    padding-bottom: 2rem;
+}
+
+.main-todo-container {
+    padding: 2rem !important;
+    align-content: center;
 }

@@ -1,13 +1,24 @@
 import React from 'react'
-import { Alert } from 'react-bootstrap';
+import { Alert, Button, Col, Row} from 'react-bootstrap';
 
 
-export default function Todo(props) {
+export default function Todo({ item, onClickChildButton }) {
   return (
     <div className='todo'>
-        <Alert key="primary" variant="primary">
-            { props.item }
-        </Alert>
+        <Row>
+            <Col xs={9} md={10}>
+                <Alert key="primary" variant="primary">
+                    { item }
+                </Alert>
+            </Col>
+            <Col xs={3} md={2} className='todo-col-button'>
+                <Button
+                    variant="outline-danger"
+                    onClick={ onClickChildButton }>
+                    Delete
+                </Button>
+            </Col>
+        </Row>
     </div>
   )
 }
