@@ -6,3 +6,7 @@
 .main-col-button {
     align-content: center;
 }
+
+.main-todo-list {
+    margin: 2rem !important;
+}
